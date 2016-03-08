@@ -1,29 +1,38 @@
 export class MainController {
-  constructor ($timeout, CategoryService, ProductService, $log, $routeParams) {
+  constructor ($timeout, CategoryService, ProductService, $routeParams) {
     'ngInject';
     this.categories = [];
+    this.allProducts = [];
     this.products = [];
     this.ProductService = ProductService;
-    this.$log = $log;
+    this.activeCategory = $routeParams["category"];
+    this.activeProduct = $routeParams["productId"] || false;
+
+
+
 
     CategoryService.callApi().success((data) => {
       this.categories = data.Data;
-      let activeCategory = $routeParams["category"];
-      if (!activeCategory) {
-        angular.forEach(this.categories, (val, key) =>  this.showProducts(this.categories[key].href))
-      }
-      else {
-        this.showProducts("http:\/\/awsstaging.flashtalkingfeeds.com\/temp\/bas\/test-api\/get.php?category="+activeCategory);
-      }
-
+      angular.forEach(this.categories, (val, key) =>  this.setAllProducts(this.categories[key]))
     });
+
   }
 
 
-  showProducts(url, $log) {
-    this.ProductService.callApi(url).success((data) => {
-      this.products.push.apply(this.products, data.Data);
+  setAllProducts(obj) {
+    this.ProductService.callApi(obj.href).success((data) => {
+      angular.forEach(data.Data, (val, key) => data.Data[key].category = obj.id);
+      this.allProducts.push.apply(this.allProducts, data.Data);
+      this.getProducts();
     });
+  }
+
+  getProducts() {
+    this.activeProduct ? this.showDetail() : !this.activeCategory ? this.products = this.allProducts : this.products = this.allProducts.filter(x => x.category === this.activeCategory);
+  }
+
+  showDetail() {
+    this.products = this.allProducts.filter(x => x.id === this.activeProduct);
   }
 
 }

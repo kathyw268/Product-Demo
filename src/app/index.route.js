@@ -12,7 +12,7 @@ export function routerConfig ($routeProvider) {
       controllerAs: 'main'
     })
     .when('/:category/:productId', {
-      templateUrl: 'app/components/product/productDetail.html',
+      templateUrl: 'app/main/main.html',
       controller: 'MainController',
       controllerAs: 'main'
     })

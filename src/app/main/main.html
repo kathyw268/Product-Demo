@@ -10,19 +10,21 @@
         </md-tab>
       </md-tabs>
       <md-card-content layout="row" layout-wrap class="product-box">
-        <md-card class="product-card" flex ng-repeat="product in main.products">
-          <md-card-title-media>
-            <div class="md-media-lg card-media">
-              <img class="product-image" ng-src="{{ product.image }}" alt="{{ product.title }}">
-            </div>
-          </md-card-title-media>
-          <md-card-title class="md-padding">
-            <md-card-title-text>
-              <h2 class="md-title">{{ product.title }}</h2>
-              <p>${{ product.price }}</p>
-            </md-card-title-text>
-          </md-card-title>
-        </md-card>
+        <md-card ng-class="{{main.activeProduct ? 'detail-view' : 'product-view'}}" class="product-card" flex ng-repeat="product in main.products">
+          <a href="/#/{{product.category}}/{{product.id}}">
+            <md-card-title-media>
+              <div class="md-media-lg card-media">
+                <img class="product-image" ng-src="{{ product.image }}" alt="{{ product.title }}">
+              </div>
+            </md-card-title-media>
+            <md-card-title class="md-padding">
+              <md-card-title-text>
+                <h2 class="md-title">{{ product.title }}</h2>
+                <p>${{ product.price }}</p>
+              </md-card-title-text>
+            </md-card-title>
+          </md-card>
+        </a>
       </md-card-content>
     </div>
   </md-content>
