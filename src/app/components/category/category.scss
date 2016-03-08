@@ -2,8 +2,15 @@
   md-tabs-wrapper {
     background-color: #546E7A;
   }
-  .md-tab span {
+  .category-link {
     color: #FFFDE7;
+    display: inline-block;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .md-tab {
+    cursor: default;
   }
 
   .md-tab.md-active span {
