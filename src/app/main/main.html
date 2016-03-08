@@ -1,0 +1,25 @@
+<div layout="vertical" layout-fill>
+  <md-content flex="100">
+    <div layout="column" flex>
+      <md-tabs class="category-box" md-dynamic-height md-border-bottom>
+        <md-tab class="md-padding category-item" ng-repeat="category in main.categories" label="{{category.title}}" ng-click="main.showProducts(category.href)">
+          <h1>{{category.title}}</h1>
+          <md-card ng-repeat="product in main.products">
+            <md-card-content class="product-card md-padding">
+              <md-card-title-media>
+                <div class="md-media-lg card-media">
+                  <img class="product-image" ng-src="{{ product.image }}" alt="{{ product.title }}">
+                </div>
+              </md-card-title-media>
+              </md-card-title-text>
+              <md-card-title class="md-padding">
+                <md-card-title-text>
+                  <h2 class="md-title">{{ product.title }}</h2>
+                  <p>${{ product.price }}</p>
+                </md-card-title>
+            </md-card-content>
+        </md-tab>
+      </md-tabs>
+    </div>
+  </md-content>
+</div>
